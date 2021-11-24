@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="core_bancarioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="INT_CLIECODIGO" />
+          </Key>
+          <Property Name="INT_CLIECODIGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VCH_CLIENOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="VCH_CLIEAPELLIDO" Type="varchar" MaxLength="50" />
+          <Property Name="VCH_CLIECEDULA" Type="varchar" MaxLength="10" />
+          <Property Name="VCH_CLIEDIRECCION" Type="varchar" MaxLength="100" />
+          <Property Name="VCH_CLIETELEFONO" Type="varchar" MaxLength="20" />
+          <Property Name="VCH_CLIEEMAIL" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="INT_CUENCODIGO" />
+          </Key>
+          <Property Name="INT_CUENCODIGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INT_CLIECODIGO" Type="int" Nullable="false" />
+          <Property Name="VCH_CUENNUMERO" Type="varchar" MaxLength="10" />
+          <Property Name="VCH_CUENTIPO" Type="varchar" MaxLength="64" />
+          <Property Name="DEC_CUENSALDO" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="DTT_CUENFECHACREACION" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MOVIMIENTO">
+          <Key>
+            <PropertyRef Name="INT_MOVICODIGO" />
+          </Key>
+          <Property Name="INT_MOVICODIGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INT_CUENCODIGO" Type="int" Nullable="false" />
+          <Property Name="DTT_MOVIFECHA" Type="datetime" />
+          <Property Name="VCH_MOVITIPO" Type="char" MaxLength="64" />
+          <Property Name="DEC_MOVIVALOR" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="DEC_MOVISALDOFINAL" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="VCH_MOVICUENTORIG" Type="varchar" MaxLength="10" />
+          <Property Name="VCH_MOVICUENTDEST" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_CUENTA_RELATIONS_CLIENTE">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="INT_CLIECODIGO" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="INT_CLIECODIGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MOVIMIEN_RELATIONS_CUENTA">
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="1" />
+          <End Role="MOVIMIENTO" Type="Self.MOVIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA">
+              <PropertyRef Name="INT_CUENCODIGO" />
+            </Principal>
+            <Dependent Role="MOVIMIENTO">
+              <PropertyRef Name="INT_CUENCODIGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="core_bancarioModelStoreContainer">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVIMIENTO" EntityType="Self.MOVIMIENTO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CUENTA_RELATIONS_CLIENTE" Association="Self.FK_CUENTA_RELATIONS_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MOVIMIEN_RELATIONS_CUENTA" Association="Self.FK_MOVIMIEN_RELATIONS_CUENTA">
+            <End Role="CUENTA" EntitySet="CUENTA" />
+            <End Role="MOVIMIENTO" EntitySet="MOVIMIENTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="core_bancarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="INT_CLIECODIGO" />
+          </Key>
+          <Property Name="INT_CLIECODIGO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VCH_CLIENOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VCH_CLIEAPELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VCH_CLIECEDULA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VCH_CLIEDIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VCH_CLIETELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="VCH_CLIEEMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_RELATIONS_CLIENTE" FromRole="CLIENTE" ToRole="CUENTA" />
+        </EntityType>
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="INT_CUENCODIGO" />
+          </Key>
+          <Property Name="INT_CUENCODIGO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INT_CLIECODIGO" Type="Int32" Nullable="false" />
+          <Property Name="VCH_CUENNUMERO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VCH_CUENTIPO" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DEC_CUENSALDO" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="DTT_CUENFECHACREACION" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CUENTA_RELATIONS_CLIENTE" FromRole="CUENTA" ToRole="CLIENTE" />
+          <NavigationProperty Name="MOVIMIENTO" Relationship="Self.FK_MOVIMIEN_RELATIONS_CUENTA" FromRole="CUENTA" ToRole="MOVIMIENTO" />
+        </EntityType>
+        <EntityType Name="MOVIMIENTO">
+          <Key>
+            <PropertyRef Name="INT_MOVICODIGO" />
+          </Key>
+          <Property Name="INT_MOVICODIGO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INT_CUENCODIGO" Type="Int32" Nullable="false" />
+          <Property Name="DTT_MOVIFECHA" Type="DateTime" Precision="3" />
+          <Property Name="VCH_MOVITIPO" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Name="DEC_MOVIVALOR" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="DEC_MOVISALDOFINAL" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="VCH_MOVICUENTORIG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VCH_MOVICUENTDEST" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_MOVIMIEN_RELATIONS_CUENTA" FromRole="MOVIMIENTO" ToRole="CUENTA" />
+        </EntityType>
+        <Association Name="FK_CUENTA_RELATIONS_CLIENTE">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="INT_CLIECODIGO" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="INT_CLIECODIGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MOVIMIEN_RELATIONS_CUENTA">
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="1" />
+          <End Role="MOVIMIENTO" Type="Self.MOVIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA">
+              <PropertyRef Name="INT_CUENCODIGO" />
+            </Principal>
+            <Dependent Role="MOVIMIENTO">
+              <PropertyRef Name="INT_CUENCODIGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="core_bancarioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" />
+          <EntitySet Name="MOVIMIENTO" EntityType="Self.MOVIMIENTO" />
+          <AssociationSet Name="FK_CUENTA_RELATIONS_CLIENTE" Association="Self.FK_CUENTA_RELATIONS_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MOVIMIEN_RELATIONS_CUENTA" Association="Self.FK_MOVIMIEN_RELATIONS_CUENTA">
+            <End Role="CUENTA" EntitySet="CUENTA" />
+            <End Role="MOVIMIENTO" EntitySet="MOVIMIENTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="core_bancarioModelStoreContainer" CdmEntityContainer="core_bancarioEntities">
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="core_bancarioModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="INT_CLIECODIGO" ColumnName="INT_CLIECODIGO" />
+                <ScalarProperty Name="VCH_CLIENOMBRE" ColumnName="VCH_CLIENOMBRE" />
+                <ScalarProperty Name="VCH_CLIEAPELLIDO" ColumnName="VCH_CLIEAPELLIDO" />
+                <ScalarProperty Name="VCH_CLIECEDULA" ColumnName="VCH_CLIECEDULA" />
+                <ScalarProperty Name="VCH_CLIEDIRECCION" ColumnName="VCH_CLIEDIRECCION" />
+                <ScalarProperty Name="VCH_CLIETELEFONO" ColumnName="VCH_CLIETELEFONO" />
+                <ScalarProperty Name="VCH_CLIEEMAIL" ColumnName="VCH_CLIEEMAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUENTA">
+            <EntityTypeMapping TypeName="core_bancarioModel.CUENTA">
+              <MappingFragment StoreEntitySet="CUENTA">
+                <ScalarProperty Name="INT_CUENCODIGO" ColumnName="INT_CUENCODIGO" />
+                <ScalarProperty Name="INT_CLIECODIGO" ColumnName="INT_CLIECODIGO" />
+                <ScalarProperty Name="VCH_CUENNUMERO" ColumnName="VCH_CUENNUMERO" />
+                <ScalarProperty Name="VCH_CUENTIPO" ColumnName="VCH_CUENTIPO" />
+                <ScalarProperty Name="DEC_CUENSALDO" ColumnName="DEC_CUENSALDO" />
+                <ScalarProperty Name="DTT_CUENFECHACREACION" ColumnName="DTT_CUENFECHACREACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVIMIENTO">
+            <EntityTypeMapping TypeName="core_bancarioModel.MOVIMIENTO">
+              <MappingFragment StoreEntitySet="MOVIMIENTO">
+                <ScalarProperty Name="INT_MOVICODIGO" ColumnName="INT_MOVICODIGO" />
+                <ScalarProperty Name="INT_CUENCODIGO" ColumnName="INT_CUENCODIGO" />
+                <ScalarProperty Name="DTT_MOVIFECHA" ColumnName="DTT_MOVIFECHA" />
+                <ScalarProperty Name="VCH_MOVITIPO" ColumnName="VCH_MOVITIPO" />
+                <ScalarProperty Name="DEC_MOVIVALOR" ColumnName="DEC_MOVIVALOR" />
+                <ScalarProperty Name="DEC_MOVISALDOFINAL" ColumnName="DEC_MOVISALDOFINAL" />
+                <ScalarProperty Name="VCH_MOVICUENTORIG" ColumnName="VCH_MOVICUENTORIG" />
+                <ScalarProperty Name="VCH_MOVICUENTDEST" ColumnName="VCH_MOVICUENTDEST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

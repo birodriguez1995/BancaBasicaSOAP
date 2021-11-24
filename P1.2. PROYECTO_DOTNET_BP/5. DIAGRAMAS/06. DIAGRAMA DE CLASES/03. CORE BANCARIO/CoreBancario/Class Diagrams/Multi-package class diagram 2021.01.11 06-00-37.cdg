@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-package class diagram">
+  <ClassDiagramComponents>
+    <Class name="wscorebank" package="ec.edu.monster.ws" visibility="public" xPosition="-153.0" yPosition="1077.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="buscarCliente" returnType="Cliente" visibility="public">
+          <Argument type="String" name="numCedula"/>
+          <Argument type="String" name="numCuenta"/>
+        </Method>
+        <Method name="obtenerCuentas" returnType="List&lt;Cuenta&gt;" visibility="public">
+          <Argument type="String" name="numCedula"/>
+        </Method>
+        <Method name="obtenerMovimientos" returnType="List&lt;Movimiento&gt;" visibility="public">
+          <Argument type="String" name="numCuenta"/>
+        </Method>
+        <Method name="transferirDinero" returnType="java.lang.Boolean" visibility="public">
+          <Argument type="String" name="numCuentaOrig"/>
+          <Argument type="double" name="monto"/>
+          <Argument type="String" name="numCuentaDest"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="AccesoDB" package="ec.edu.monster.db" visibility="public" xPosition="314.0" yPosition="420.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getConecction" returnType="Connection" visibility="public" isStatic="true"/>
+      </Methods>
+    </Class>
+    <Class name="Cliente" package="ec.edu.monster.modelo" visibility="public" xPosition="922.0" yPosition="919.0">
+      <Fields>
+        <Field name="codigoCliente" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="cedula" type="String" visibility="private"/>
+        <Field name="direccion" type="String" visibility="private"/>
+        <Field name="telefono" type="String" visibility="private"/>
+        <Field name="email" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="codigoCliente"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="cedula"/>
+          <Argument type="String" name="direccion"/>
+          <Argument type="String" name="telefono"/>
+          <Argument type="String" name="email"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCodigoCliente" returnType="int" visibility="public"/>
+        <Method name="setCodigoCliente" returnType="void" visibility="public">
+          <Argument type="int" name="codigoCliente"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getApellido" returnType="String" visibility="public"/>
+        <Method name="setApellido" returnType="void" visibility="public">
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="getCedula" returnType="String" visibility="public"/>
+        <Method name="setCedula" returnType="void" visibility="public">
+          <Argument type="String" name="cedula"/>
+        </Method>
+        <Method name="getDireccion" returnType="String" visibility="public"/>
+        <Method name="setDireccion" returnType="void" visibility="public">
+          <Argument type="String" name="direccion"/>
+        </Method>
+        <Method name="getTelefono" returnType="String" visibility="public"/>
+        <Method name="setTelefono" returnType="void" visibility="public">
+          <Argument type="String" name="telefono"/>
+        </Method>
+        <Method name="getEmail" returnType="String" visibility="public"/>
+        <Method name="setEmail" returnType="void" visibility="public">
+          <Argument type="String" name="email"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Cuenta" package="ec.edu.monster.modelo" visibility="public" xPosition="951.0" yPosition="307.0">
+      <Fields>
+        <Field name="codigoCuenta" type="int" visibility="private"/>
+        <Field name="codigoCliente" type="int" visibility="private"/>
+        <Field name="numero" type="String" visibility="private"/>
+        <Field name="tipo" type="String" visibility="private"/>
+        <Field name="saldo" type="double" visibility="private"/>
+        <Field name="fechaCreacion" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="codigoCuenta"/>
+          <Argument type="int" name="codigoCliente"/>
+          <Argument type="String" name="numero"/>
+          <Argument type="String" name="tipo"/>
+          <Argument type="double" name="saldo"/>
+          <Argument type="Date" name="fechaCreacion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCodigoCuenta" returnType="int" visibility="public"/>
+        <Method name="setCodigoCuenta" returnType="void" visibility="public">
+          <Argument type="int" name="codigoCuenta"/>
+        </Method>
+        <Method name="getCodigoCliente" returnType="int" visibility="public"/>
+        <Method name="setCodigoCliente" returnType="void" visibility="public">
+          <Argument type="int" name="codigoCliente"/>
+        </Method>
+        <Method name="getNumero" returnType="String" visibility="public"/>
+        <Method name="setNumero" returnType="void" visibility="public">
+          <Argument type="String" name="numero"/>
+        </Method>
+        <Method name="getTipo" returnType="String" visibility="public"/>
+        <Method name="setTipo" returnType="void" visibility="public">
+          <Argument type="String" name="tipo"/>
+        </Method>
+        <Method name="getSaldo" returnType="double" visibility="public"/>
+        <Method name="setSaldo" returnType="void" visibility="public">
+          <Argument type="double" name="saldo"/>
+        </Method>
+        <Method name="getFechaCreacion" returnType="Date" visibility="public"/>
+        <Method name="setFechaCreacion" returnType="void" visibility="public">
+          <Argument type="Date" name="fechaCreacion"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Movimiento" package="ec.edu.monster.modelo" visibility="public" xPosition="813.0" yPosition="1706.0">
+      <Fields>
+        <Field name="codigoMovimiento" type="int" visibility="private"/>
+        <Field name="codigoCuenta" type="int" visibility="private"/>
+        <Field name="fecha" type="Date" visibility="private"/>
+        <Field name="tipo" type="String" visibility="private"/>
+        <Field name="valor" type="double" visibility="private"/>
+        <Field name="saldoFinal" type="double" visibility="private"/>
+        <Field name="cuentaOrigen" type="String" visibility="private"/>
+        <Field name="cuentaDestino" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="codigoMovimiento"/>
+          <Argument type="int" name="codigoCuenta"/>
+          <Argument type="Date" name="fecha"/>
+          <Argument type="String" name="tipo"/>
+          <Argument type="double" name="valor"/>
+          <Argument type="double" name="saldoFinal"/>
+          <Argument type="String" name="cuentaOrigen"/>
+          <Argument type="String" name="cuentaDestino"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCodigoMovimiento" returnType="int" visibility="public"/>
+        <Method name="setCodigoMovimiento" returnType="void" visibility="public">
+          <Argument type="int" name="codigoMovimiento"/>
+        </Method>
+        <Method name="getCodigoCuenta" returnType="int" visibility="public"/>
+        <Method name="setCodigoCuenta" returnType="void" visibility="public">
+          <Argument type="int" name="codigoCuenta"/>
+        </Method>
+        <Method name="getFecha" returnType="Date" visibility="public"/>
+        <Method name="setFecha" returnType="void" visibility="public">
+          <Argument type="Date" name="fecha"/>
+        </Method>
+        <Method name="getTipo" returnType="String" visibility="public"/>
+        <Method name="setTipo" returnType="void" visibility="public">
+          <Argument type="String" name="tipo"/>
+        </Method>
+        <Method name="getValor" returnType="double" visibility="public"/>
+        <Method name="setValor" returnType="void" visibility="public">
+          <Argument type="double" name="valor"/>
+        </Method>
+        <Method name="getSaldoFinal" returnType="double" visibility="public"/>
+        <Method name="setSaldoFinal" returnType="void" visibility="public">
+          <Argument type="double" name="saldoFinal"/>
+        </Method>
+        <Method name="getCuentaOrigen" returnType="String" visibility="public"/>
+        <Method name="setCuentaOrigen" returnType="void" visibility="public">
+          <Argument type="String" name="cuentaOrigen"/>
+        </Method>
+        <Method name="getCuentaDestino" returnType="String" visibility="public"/>
+        <Method name="setCuentaDestino" returnType="void" visibility="public">
+          <Argument type="String" name="cuentaDestino"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Prueba01_Conexion" package="ec.edu.monster.prueba" visibility="public" xPosition="374.0" yPosition="39.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Prueba02_BuscarCliente" package="ec.edu.monster.prueba" visibility="public" xPosition="634.0" yPosition="39.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Prueba03_ObtenerCuentas" package="ec.edu.monster.prueba" visibility="public" xPosition="893.0" yPosition="39.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Prueba04_ObtenerMovimientos" package="ec.edu.monster.prueba" visibility="public" xPosition="1146.0" yPosition="39.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Prueba05_Transferencia" package="ec.edu.monster.prueba" visibility="public" xPosition="1436.0" yPosition="39.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Prueba06_ValidarCuenta" package="ec.edu.monster.prueba" visibility="public" xPosition="1698.0" yPosition="39.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Prueba07_ObtenerSaldoCuenta" package="ec.edu.monster.prueba" visibility="public" xPosition="1971.0" yPosition="39.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CoreBankService" package="ec.edu.monster.servicio" visibility="public" xPosition="2164.0" yPosition="958.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="buscarCliente" returnType="Cliente" visibility="public">
+          <Argument type="String" name="cedula"/>
+          <Argument type="String" name="cuenta"/>
+        </Method>
+        <Method name="obtenerCuentas" returnType="List&lt;Cuenta&gt;" visibility="public">
+          <Argument type="String" name="cedula"/>
+        </Method>
+        <Method name="obtenerCodigoCliente" returnType="int" visibility="public">
+          <Argument type="String" name="cedula"/>
+        </Method>
+        <Method name="obtenerMovimientos" returnType="List&lt;Movimiento&gt;" visibility="public">
+          <Argument type="String" name="cuenta"/>
+        </Method>
+        <Method name="transferirDinero" returnType="boolean" visibility="public">
+          <Argument type="String" name="cuentaOrig"/>
+          <Argument type="double" name="monto"/>
+          <Argument type="String" name="cuentaDest"/>
+        </Method>
+        <Method name="registroMovDebito" returnType="void" visibility="public">
+          <Argument type="String" name="o"/>
+          <Argument type="double" name="s"/>
+          <Argument type="double" name="m"/>
+          <Argument type="String" name="d"/>
+        </Method>
+        <Method name="registroMovCredito" returnType="void" visibility="public">
+          <Argument type="String" name="o"/>
+          <Argument type="double" name="s"/>
+          <Argument type="double" name="m"/>
+          <Argument type="String" name="d"/>
+        </Method>
+        <Method name="validarCuenta" returnType="boolean" visibility="public">
+          <Argument type="String" name="cuenta"/>
+        </Method>
+        <Method name="obtenerSaldoCuenta" returnType="double" visibility="public">
+          <Argument type="String" name="cuenta"/>
+        </Method>
+        <Method name="obtenerCuenta" returnType="Cuenta" visibility="public">
+          <Argument type="String" name="cuenta"/>
+        </Method>
+        <Method name="obtenerCodigoCuenta" returnType="int" visibility="public">
+          <Argument type="String" name="cuenta"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="ec.edu.monster.ws.wscorebank" target="ec.edu.monster.modelo.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.monster.ws.wscorebank" target="ec.edu.monster.modelo.Cuenta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.monster.ws.wscorebank" target="ec.edu.monster.modelo.Movimiento" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.monster.servicio.CoreBankService" target="ec.edu.monster.modelo.Movimiento" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.monster.servicio.CoreBankService" target="ec.edu.monster.modelo.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ec.edu.monster.servicio.CoreBankService" target="ec.edu.monster.modelo.Cuenta" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

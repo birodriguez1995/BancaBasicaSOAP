@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="buscarCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cedula" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cuenta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="buscarClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="buscarClienteResult" type="tns:Cliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Cliente">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="int_cliecodigo" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="vch_clienombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="vch_clieapellido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="vch_cliecedula" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="vch_cliedireccion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="vch_clietelefono" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="vch_clieemail" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="obtenerCuentas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cedula" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerCuentasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerCuentasResult" type="tns:ArrayOfCuenta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCuenta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cuenta" nillable="true" type="tns:Cuenta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cuenta">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="INT_CUENCODIGO" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="INT_CLIECODIGO" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VCH_CUENNUMERO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VCH_CUENTIPO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEC_CUENSALDO" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DTT_CUENFECHACREACION" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="obtenerMovimientos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cuenta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerMovimientosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerMovimientosResult" type="tns:ArrayOfMovimiento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMovimiento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Movimiento" nillable="true" type="tns:Movimiento" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Movimiento">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="INT_MOVICODIGO" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="INT_CUENCODIGO" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DTT_MOVIFECHA" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="VCH_MOVITIPO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEC_MOVIVALOR" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DEC_MOVISALDOFINAL" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="VCH_MOVICUENTORIG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VCH_MOVICUENTDEST" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="transferirDinero">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cuentaOrig" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="monto" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="cuentaDest" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="transferirDineroResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="transferirDineroResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerSaldoCuenta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cuenta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerSaldoCuentaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="obtenerSaldoCuentaResult" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerClienteDestino">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cuenta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerClienteDestinoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerClienteDestinoResult" type="tns:Cliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="validarCuenta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cuenta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="validarCuentaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="validarCuentaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerCuenta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cuenta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerCuentaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerCuentaResult" type="tns:Cuenta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="num" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerClienteResult" type="tns:Cliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="buscarClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:buscarCliente" />
+  </wsdl:message>
+  <wsdl:message name="buscarClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:buscarClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtenerCuentasSoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerCuentas" />
+  </wsdl:message>
+  <wsdl:message name="obtenerCuentasSoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerCuentasResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtenerMovimientosSoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerMovimientos" />
+  </wsdl:message>
+  <wsdl:message name="obtenerMovimientosSoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerMovimientosResponse" />
+  </wsdl:message>
+  <wsdl:message name="transferirDineroSoapIn">
+    <wsdl:part name="parameters" element="tns:transferirDinero" />
+  </wsdl:message>
+  <wsdl:message name="transferirDineroSoapOut">
+    <wsdl:part name="parameters" element="tns:transferirDineroResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtenerSaldoCuentaSoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerSaldoCuenta" />
+  </wsdl:message>
+  <wsdl:message name="obtenerSaldoCuentaSoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerSaldoCuentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtenerClienteDestinoSoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerClienteDestino" />
+  </wsdl:message>
+  <wsdl:message name="obtenerClienteDestinoSoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerClienteDestinoResponse" />
+  </wsdl:message>
+  <wsdl:message name="validarCuentaSoapIn">
+    <wsdl:part name="parameters" element="tns:validarCuenta" />
+  </wsdl:message>
+  <wsdl:message name="validarCuentaSoapOut">
+    <wsdl:part name="parameters" element="tns:validarCuentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtenerCuentaSoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerCuenta" />
+  </wsdl:message>
+  <wsdl:message name="obtenerCuentaSoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerCuentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtenerClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerCliente" />
+  </wsdl:message>
+  <wsdl:message name="obtenerClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerClienteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CoreBankServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="buscarCliente">
+      <wsdl:input message="tns:buscarClienteSoapIn" />
+      <wsdl:output message="tns:buscarClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCuentas">
+      <wsdl:input message="tns:obtenerCuentasSoapIn" />
+      <wsdl:output message="tns:obtenerCuentasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtenerMovimientos">
+      <wsdl:input message="tns:obtenerMovimientosSoapIn" />
+      <wsdl:output message="tns:obtenerMovimientosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="transferirDinero">
+      <wsdl:input message="tns:transferirDineroSoapIn" />
+      <wsdl:output message="tns:transferirDineroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtenerSaldoCuenta">
+      <wsdl:input message="tns:obtenerSaldoCuentaSoapIn" />
+      <wsdl:output message="tns:obtenerSaldoCuentaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtenerClienteDestino">
+      <wsdl:input message="tns:obtenerClienteDestinoSoapIn" />
+      <wsdl:output message="tns:obtenerClienteDestinoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="validarCuenta">
+      <wsdl:input message="tns:validarCuentaSoapIn" />
+      <wsdl:output message="tns:validarCuentaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCuenta">
+      <wsdl:input message="tns:obtenerCuentaSoapIn" />
+      <wsdl:output message="tns:obtenerCuentaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCliente">
+      <wsdl:input message="tns:obtenerClienteSoapIn" />
+      <wsdl:output message="tns:obtenerClienteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CoreBankServiceSoap" type="tns:CoreBankServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarCliente">
+      <soap:operation soapAction="http://tempuri.org/buscarCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCuentas">
+      <soap:operation soapAction="http://tempuri.org/obtenerCuentas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerMovimientos">
+      <soap:operation soapAction="http://tempuri.org/obtenerMovimientos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferirDinero">
+      <soap:operation soapAction="http://tempuri.org/transferirDinero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerSaldoCuenta">
+      <soap:operation soapAction="http://tempuri.org/obtenerSaldoCuenta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerClienteDestino">
+      <soap:operation soapAction="http://tempuri.org/obtenerClienteDestino" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validarCuenta">
+      <soap:operation soapAction="http://tempuri.org/validarCuenta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCuenta">
+      <soap:operation soapAction="http://tempuri.org/obtenerCuenta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCliente">
+      <soap:operation soapAction="http://tempuri.org/obtenerCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CoreBankServiceSoap12" type="tns:CoreBankServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="buscarCliente">
+      <soap12:operation soapAction="http://tempuri.org/buscarCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCuentas">
+      <soap12:operation soapAction="http://tempuri.org/obtenerCuentas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerMovimientos">
+      <soap12:operation soapAction="http://tempuri.org/obtenerMovimientos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferirDinero">
+      <soap12:operation soapAction="http://tempuri.org/transferirDinero" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerSaldoCuenta">
+      <soap12:operation soapAction="http://tempuri.org/obtenerSaldoCuenta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerClienteDestino">
+      <soap12:operation soapAction="http://tempuri.org/obtenerClienteDestino" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validarCuenta">
+      <soap12:operation soapAction="http://tempuri.org/validarCuenta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCuenta">
+      <soap12:operation soapAction="http://tempuri.org/obtenerCuenta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCliente">
+      <soap12:operation soapAction="http://tempuri.org/obtenerCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CoreBankService">
+    <wsdl:port name="CoreBankServiceSoap" binding="tns:CoreBankServiceSoap">
+      <soap:address location="http://localhost:51069/CoreBankService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CoreBankServiceSoap12" binding="tns:CoreBankServiceSoap12">
+      <soap12:address location="http://localhost:51069/CoreBankService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
